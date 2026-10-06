@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Thank You, Teacher 💗</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Serif+Display&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --pink:#ff8fab;
+  --pink2:#ffc2d1;
+  --soft:#ffe8ef;
+  --cream:#fffaf7;
+  --wine:#9d234b;
+  --ink:#4b2130;
+  --gold:#d6a34a;
+  --shadow:rgba(126,40,70,.18);
+  --display:"DM Serif Display",Georgia,serif;
+  --hand:"Caveat","Segoe Script",cursive;
+  --ui:"Nunito",system-ui,sans-serif;
+}
+
+*{box-sizing:border-box}
+
+html,body{margin:0;min-height:100%;}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--ink);
+  font-family:var(--ui);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,194,209,.8),transparent 28%),
+    radial-gradient(circle at 90% 80%,rgba(255,143,171,.38),transparent 30%),
+    linear-gradient(135deg,#fff1f5,#ffe1ea 50%,#fff7f2);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.28;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px);
+  background-size:22px 22px;
+}
+
+.stage{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:30px 18px;
+  position:relative;
+}
+
+.intro{
+  width:min(100%,500px);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  animation:fadeUp .8s ease both;
+}
+
+.eyebrow{
+  color:var(--wine);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+.intro h1{
+  margin:0;
+  font-family:var(--display);
+  font-size:clamp(3rem,13vw,5.3rem);
+  line-height:.95;
+  font-weight:400;
+  color:var(--wine);
+  text-shadow:3px 4px 0 rgba(255,255,255,.7);
+}
+
+.intro h1 span{color:var(--pink);}
+
+.subtitle{
+  margin:0;
+  max-width:360px;
+  font-family:var(--hand);
+  font-size:1.65rem;
+  line-height:1.15;
+}
+
+.envelope{
+  width:min(330px,85vw);
+  aspect-ratio:1.25;
+  position:relative;
+  margin:8px 0;
+  cursor:pointer;
+  filter:drop-shadow(0 18px 18px var(--shadow));
+  transition:transform .25s ease;
+}
+
+.envelope:hover{transform:translateY(-7px) rotate(-1deg)}
+
+.env-back{
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  background:linear-gradient(145deg,#ffb6c9,#ff8fab);
+  overflow:hidden;
+}
+
+.env-back:after{
+  content:"";
+  position:absolute;
+  width:75%;
+  height:75%;
+  right:-15%;
+  bottom:-35%;
+  background:#fff0f4;
+  transform:rotate(45deg);
+  opacity:.35;
+}
+
+.env-flap{
+  position:absolute;
+  left:0;right:0;top:0;
+  height:62%;
+  background:#ffcad7;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+  z-index:4;
+}
+
+.envelope.opened .env-flap{transform:rotateX(175deg)}
+
+.env-paper{
+  position:absolute;
+  left:8%;right:8%;
+  bottom:8%;
+  height:78%;
+  background:var(--cream);
+  border-radius:8px;
+  z-index:2;
+  box-shadow:0 6px 16px rgba(90,30,50,.12);
+  display:grid;
+  place-items:center;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope.opened .env-paper{transform:translateY(-48%)}
+
+.seal{
+  width:58px;height:58px;
+  border-radius:50%;
+  background:var(--wine);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  z-index:5;
+  box-shadow:0 5px 12px rgba(120,25,60,.25);
+}
+
+.envelope.opened .seal{opacity:0;pointer-events:none}
+
+.open-hint{
+  color:var(--wine);
+  font-size:.9rem;
+  font-weight:800;
+}
+
+button{
+  font-family:var(--ui);
+}
+
+.openBtn{
+  border:0;
+  color:white;
+  background:linear-gradient(135deg,var(--wine),#c43e68);
+  padding:15px 30px;
+  border-radius:999px;
+  font-size:1rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 0 #741937,0 12px 25px var(--shadow);
+  transition:.15s;
+}
+
+.openBtn:hover{transform:translateY(-2px)}
+.openBtn:active{transform:translateY(4px);box-shadow:0 2px 0 #741937}
+
+.card{
+  width:min(100%,560px);
+  position:relative;
+  background:var(--cream);
+  border:2px solid #f3a0b7;
+  border-radius:26px 8px 26px 8px;
+  padding:42px 34px 34px;
+  box-shadow:15px 18px 0 rgba(255,143,171,.35),0 25px 60px var(--shadow);
+  text-align:center;
+  animation:cardIn .9s cubic-bezier(.2,.9,.25,1.2) both;
+}
+
+.card:before,.card:after{
+  content:"";
+  position:absolute;
+  width:70px;height:70px;
+  border:2px solid var(--pink2);
+  opacity:.55;
+}
+.card:before{left:12px;top:12px;border-right:0;border-bottom:0;border-radius:20px 0 0 0}
+.card:after{right:12px;bottom:12px;border-left:0;border-top:0;border-radius:0 0 20px 0}
+
+.top-note{
+  color:var(--wine);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.flower{
+  font-size:2rem;
+  margin:7px 0;
+}
+
+.card h2{
+  font-family:var(--display);
+  color:var(--wine);
+  font-size:clamp(2.5rem,10vw,4rem);
+  line-height:1;
+  font-weight:400;
+  margin:8px 0 18px;
+}
+
+.gold-line{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 auto 22px;
+  max-width:290px;
+}
+.gold-line:before,.gold-line:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:var(--gold);
+}
+.gold-line span{color:var(--gold);font-size:18px}
+
+.message{
+  font-family:var(--hand);
+  font-size:clamp(1.65rem,6vw,2rem);
+  line-height:1.28;
+  margin:0 auto 17px;
+  max-width:450px;
+}
+
+.highlight{
+  display:inline-block;
+  color:var(--wine);
+  font-weight:700;
+  font-size:1.12em;
+  transform:rotate(-1deg);
+}
+
+.thanks{
+  margin:24px auto;
+  padding:17px 20px;
+  background:#fff0f4;
+  border:1px dashed #e98ba5;
+  border-radius:18px;
+  max-width:440px;
+  font-family:var(--hand);
+  font-size:1.45rem;
+}
+
+.signature{
+  font-family:var(--hand);
+  color:var(--wine);
+  font-size:2rem;
+  font-weight:700;
+  margin-top:24px;
+}
+
+.small-footer{
+  margin-top:8px;
+  font-size:.72rem;
+  color:#9b6677;
+  letter-spacing:.08em;
+}
+
+.closeBtn{
+  margin-top:22px;
+  background:none;
+  border:1px solid #e6a0b3;
+  color:var(--wine);
+  padding:9px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.petals,.sparkles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:20;
+}
+
+.petal{
+  position:absolute;
+  top:-30px;
+  animation:fall linear forwards;
+  opacity:.9;
+}
+
+.spark{
+  position:absolute;
+  animation:sparkle 1.8s ease-in-out infinite;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+@keyframes cardIn{
+  0%{opacity:0;transform:translateY(50px) rotateX(15deg) scale(.9)}
+  100%{opacity:1;transform:none}
+}
+
+@keyframes fall{
+  0%{transform:translateY(-30px) rotate(0deg);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(115vh) rotate(420deg);opacity:0}
+}
+
+@keyframes sparkle{
+  0%,100%{opacity:.15;transform:scale(.7)}
+  50%{opacity:1;transform:scale(1.3)}
+}
+
+@media(max-width:480px){
+  .stage{padding:22px 14px}
+  .card{padding:34px 21px 28px}
+  .intro h1{font-size:3.2rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="stage">
+
+  <section class="intro" id="intro">
+    <div class="eyebrow">A little surprise for you ✨</div>
+
+    <h1>Happy <span>Teachers'</span> Day</h1>
+
+    <p class="subtitle">
+      For the teacher who makes learning feel a little more special. 💗
+    </p>
+
+    <div class="envelope" id="envelope" aria-label="Open the card">
+      <div class="env-back"></div>
+      <div class="env-paper">
+        <span style="font-family:var(--hand);font-size:1.6rem;color:var(--wine)">
+          A little note...
+        </span>
+      </div>
+      <div class="env-flap"></div>
+      <div class="seal">♥</div>
+    </div>
+
+    <div class="open-hint">Tap the heart to open your card</div>
+    <button class="openBtn" id="openBtn">Open My Card 💌</button>
+  </section>
+
+  <article class="card" id="card" hidden>
+    <div class="top-note">Especially for my lovely teacher</div>
+    <div class="flower">🌷</div>
+
+    <h2>Happy Teachers' Day!</h2>
+
+    <div class="gold-line"><span>✦</span></div>
+
+    <p class="message">
+      To my lovely teacher,<br>
+      thank you for guiding me with
+      <span class="highlight">so much love, patience & kindness.</span>
+    </p>
+
+    <p class="message">
+      You didn't just teach lessons —
+      you made me believe that I could learn, grow,
+      and become better every day. 🌸
+    </p>
+
+    <div class="thanks">
+      “A great teacher leaves a little sparkle<br>
+      in every student's heart.”
+    </div>
+
+    <p class="message">
+      I may not say it every day, but I truly appreciate
+      everything you have done for me.
+    </p>
+
+    <div class="signature">
+      With lots of love,<br>
+      Sanduni 💗
+    </div>
+
+    <div class="small-footer">Thank you for being such a wonderful teacher ✨</div>
+
+    <button class="closeBtn" id="closeBtn">↩ Close Card</button>
+  </article>
+
+</div>
+
+<div class="petals" id="petals"></div>
+<div class="sparkles" id="sparkles"></div>
+
+<script>
+const intro = document.getElementById("intro");
+const card = document.getElementById("card");
+const envelope = document.getElementById("envelope");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+const petals = document.getElementById("petals");
+const sparkles = document.getElementById("sparkles");
+
+const symbols = ["♥","♡","🌸","✿","❀"];
+const sparkleSymbols = ["✦","✧","⋆","✦"];
+
+function createPetals(){
+  petals.innerHTML = "";
+  for(let i=0;i<34;i++){
+    const p=document.createElement("span");
+    p.className="petal";
+    p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    p.style.left=Math.random()*100+"vw";
+    p.style.fontSize=(12+Math.random()*20)+"px";
+    p.style.animationDuration=(4+Math.random()*5)+"s";
+    p.style.animationDelay=(Math.random()*2)+"s";
+    p.style.transform=`rotate(${Math.random()*180}deg)`;
+    petals.appendChild(p);
+    setTimeout(()=>p.remove(),10000);
+  }
+}
+
+function createSparkles(){
+  sparkles.innerHTML="";
+  for(let i=0;i<18;i++){
+    const s=document.createElement("span");
+    s.className="spark";
+    s.textContent=sparkleSymbols[i%sparkleSymbols.length];
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    s.style.fontSize=(10+Math.random()*16)+"px";
+    s.style.animationDelay=(Math.random()*1.8)+"s";
+    sparkles.appendChild(s);
+  }
+}
+
+function openCard(){
+  envelope.classList.add("opened");
+  setTimeout(()=>{
+    intro.hidden=true;
+    card.hidden=false;
+    createPetals();
+    createSparkles();
+  },650);
+}
+
+function closeCard(){
+  card.hidden=true;
+  intro.hidden=false;
+  envelope.classList.remove("opened");
+  sparkles.innerHTML="";
+  petals.innerHTML="";
+}
+
+openBtn.addEventListener("click",openCard);
+envelope.addEventListener("click",openCard);
+closeBtn.addEventListener("click",closeCard);
+</script>
+</body>
+</html>
